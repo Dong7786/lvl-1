@@ -25,9 +25,6 @@ public class TootMachine implements ActionListener{
 		frame.add(panel);
 		
 		frame.setVisible(true);
-		JButton b1 = new JButton("Long Fart");
-		JButton b2 = new JButton("Common Fart");
-		JButton b3 = new JButton("Sharp Fart");
 		panel.add(b1);
 		panel.add(b2);
 		panel.add(b3);
@@ -42,10 +39,10 @@ b3.setVisible(true);
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource().equals(b1)) {
+		
 			System.out.println("test");
-			playSound("/Users/league/Desktop/lf.webloc");
-		}
+			playSound("/Users/league/Desktop/w.wav");
+		
 	}
 	private void playSound(String fileName) {
 		AudioClip sound = JApplet.newAudioClip(getClass().getResource(fileName));
