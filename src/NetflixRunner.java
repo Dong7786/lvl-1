@@ -9,16 +9,18 @@ public static void main(String[] args) {
 	Movie Movie6 = new Movie( "The Legends of the Titanic", 2);
 	Movie1.getTicketPrice();
 			NetflixQueue bob = new NetflixQueue();
-			bob.sortMoviesByRating();
+			
 			bob.addMovie(Movie1);
 			bob.addMovie(Movie2);
 			bob.addMovie(Movie3);
 			bob.addMovie(Movie4);
 			bob.addMovie(Movie5);
 			bob.addMovie(Movie6);
+			bob.sortMoviesByRating();
+			System.out.println("------------------------------");
 			bob.printMovies();
-			
-			
-	
+			System.out.println("------------------------------");
+			System.out.println("The best movies is " + bob.movies.get(0));
+			System.out.println("The second best movies is " + bob.movies.get(1));
 }
 }
