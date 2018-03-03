@@ -1,3 +1,4 @@
+package LeagueInvaders;
 import java.awt.Graphics;
 
 public class GameObject {
