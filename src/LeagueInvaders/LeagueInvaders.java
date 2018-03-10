@@ -1,4 +1,5 @@
 package LeagueInvaders;
+
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -24,7 +25,6 @@ public class LeagueInvaders {
 	void setup() {
 		frame.add(panel);
 		frame.getContentPane().setPreferredSize(new Dimension(WIDTH, HEIGHT));
-
 		frame.pack();
 		frame.setSize(WIDTH, HEIGHT);
 		frame.setVisible(true);

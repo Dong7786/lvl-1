@@ -1,8 +1,9 @@
 package LeagueInvaders;
+
 import java.awt.Graphics;
 
 public class GameObject {
-	
+
 	int x;
 	int y;
 	int width;
@@ -20,7 +21,7 @@ public class GameObject {
 	}
 
 	void draw(Graphics g) {
-		g.fillRect(x, y, width, height);
+
 	}
 
 }

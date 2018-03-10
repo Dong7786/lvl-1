@@ -22,14 +22,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font titleStart;
 	Font titleInstructions;
 	int points = 0;
-Font endFont; 
-Font endKilled;
+	Font endFont;
+	Font endKilled;
+	Font restart;
+	Rocketship ship = new Rocketship(250, 750, 50, 50);
+
 	void updateMenuState() {
 
 	}
 
 	void updateGameState() {
-
+		ship.update();
 	}
 
 	void updateEndState() {
@@ -49,9 +52,11 @@ Font endKilled;
 	}
 
 	void drawGameState(Graphics g) {
+
 		g.setColor(Color.BLACK);
 
 		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+		ship.draw(g);
 	}
 
 	void drawEndState(Graphics g) {
@@ -61,8 +66,10 @@ Font endKilled;
 		g.setColor(Color.BLACK);
 		g.setFont(endFont);
 		g.drawString("Game Over", 140, 200);
-		g.drawString("You killed " + points +" enemies" , 140, 380);
-		
+		g.setFont(endKilled);
+		g.drawString("You killed " + points + " enemies", 150, 350);
+		g.setFont(restart);
+		g.drawString("Press ENTER to restart", 130, 500);
 	}
 
 	Timer timer;
@@ -73,7 +80,8 @@ Font endKilled;
 		titleStart = new Font("Arial", Font.BOLD, 24);
 		titleInstructions = new Font("Arial", Font.BOLD, 24);
 		endFont = new Font("Arial", Font.TRUETYPE_FONT, 48);
-		endKilled = new Font("Arial", Font.TRUETYPE_FONT, 24);
+		endKilled = new Font("Arial", Font.BOLD, 24);
+		restart = new Font("Arial", Font.BOLD, 24);
 		timer = new Timer(1000 / 60, this);
 		// object = new GameObject(0,0,20,20);
 	}
@@ -134,15 +142,21 @@ Font endKilled;
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			// object.x = object.x + 20;
+		//	ship.x = ship.x + ship.speed;
+			ship.right = true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			// object.x = object.x - 20;
+		//	ship.x = ship.x - ship.speed;
+			ship.left = true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			// object.y = object.y + 20;
+			ship.down = true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			// object.y = object.y - 20;
+			 // object.y = object.y - 20;
+			ship.up = true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			currentState++;
@@ -158,7 +172,18 @@ Font endKilled;
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			ship.right = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			ship.left = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			ship.up = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			ship.down = false;
+		}
 	}
 
 }
