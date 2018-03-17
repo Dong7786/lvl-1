@@ -25,14 +25,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font endFont;
 	Font endKilled;
 	Font restart;
-	Rocketship ship = new Rocketship(250, 750, 50, 50);
+	Rocketship ship = new Rocketship(250, 700, 50, 50);
+	ObjectManager manager = new ObjectManager(ship);
 
 	void updateMenuState() {
 
 	}
 
 	void updateGameState() {
-		ship.update();
+		manager.update();
+
 	}
 
 	void updateEndState() {
@@ -56,7 +58,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.BLACK);
 
 		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
-		ship.draw(g);
+		manager.draw(g);
+		if (ship.x  >= 450) {
+			ship.x = 450;
+		} else if (ship.x <= 0) {
+			ship.x = 0;
+
+		}
+		if(ship.y >= 730){
+			ship.y = 725;
+			
+		}else if(ship.y <= 0) {
+			ship.y = 0;
+		}
+
 	}
 
 	void drawEndState(Graphics g) {
@@ -142,12 +157,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			// object.x = object.x + 20;
-		//	ship.x = ship.x + ship.speed;
+			// ship.x = ship.x + ship.speed;
 			ship.right = true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			// object.x = object.x - 20;
-		//	ship.x = ship.x - ship.speed;
+			// ship.x = ship.x - ship.speed;
 			ship.left = true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
@@ -155,7 +170,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			ship.down = true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			 // object.y = object.y - 20;
+			// object.y = object.y - 20;
 			ship.up = true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -166,6 +181,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 			}
 
+		}
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			manager.addProjectile(new Projectiles(ship.x + 25, ship.y + 25, 1, 20));
 		}
 	}
 
