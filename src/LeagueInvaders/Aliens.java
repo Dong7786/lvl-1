@@ -1,5 +1,24 @@
 package LeagueInvaders;
 
-public class Aliens {
+import java.awt.Color;
+import java.awt.Graphics;
 
+public class Aliens extends GameObject {
+
+	Aliens(int x, int y, int width, int height) {
+		super(x, y, width, height);
+		// TODO Auto-generated constructor stub
+	}
+
+	void update() {
+		super.update();
+		collisionBox.setBounds(x, y, width, height);
+		y++;
+	}
+
+	void draw(Graphics g) {
+		g.setColor(Color.YELLOW);
+		g.fillRect(x, y, width, height);
+		g.drawRect(x, y, width, height);
+	}
 }

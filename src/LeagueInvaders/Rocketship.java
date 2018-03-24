@@ -16,17 +16,19 @@ public class Rocketship extends GameObject {
 	}
 
 	void update() {
+		super.update();
+		collisionBox.setBounds(x, y, width, height);
 		if (down == true) {
-y = y + speed;
+			y = y + speed;
 		}
 		if (up == true) {
-y = y - speed;
+			y = y - speed;
 		}
 		if (left == true) {
-x = x - speed;
+			x = x - speed;
 		}
 		if (right == true) {
-x = x + speed;
+			x = x + speed;
 		}
 	}
 

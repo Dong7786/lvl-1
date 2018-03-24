@@ -34,7 +34,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void updateGameState() {
 		manager.update();
-
+manager.checkCollision();
+manager.purgeObjects();
+if(ship.isAlive == false) {
+	currentState = END_STATE;
+}
 	}
 
 	void updateEndState() {
@@ -59,19 +63,19 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
 		manager.draw(g);
-		if (ship.x  >= 450) {
+		if (ship.x >= 450) {
 			ship.x = 450;
 		} else if (ship.x <= 0) {
 			ship.x = 0;
 
 		}
-		if(ship.y >= 730){
+		if (ship.y >= 730) {
 			ship.y = 725;
-			
-		}else if(ship.y <= 0) {
+
+		} else if (ship.y <= 0) {
 			ship.y = 0;
 		}
-
+		manager.manageEnemies();
 	}
 
 	void drawEndState(Graphics g) {
