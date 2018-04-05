@@ -10,10 +10,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
+	public static BufferedImage bulletsImg;
+	
+	public static BufferedImage aliensImg;
+
+	public static BufferedImage rImg;
+
+	public static BufferedImage bulletImg;
+
+	public static BufferedImage spaceImg;
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
@@ -21,7 +33,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font titleFont;
 	Font titleStart;
 	Font titleInstructions;
-	int points = 0;
+
 	Font endFont;
 	Font endKilled;
 	Font restart;
@@ -34,11 +46,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void updateGameState() {
 		manager.update();
-manager.checkCollision();
-manager.purgeObjects();
-if(ship.isAlive == false) {
-	currentState = END_STATE;
-}
+		manager.checkCollision();
+		manager.purgeObjects();
+		if (ship.isAlive == false) {
+			currentState = END_STATE;
+		}
 	}
 
 	void updateEndState() {
@@ -59,9 +71,7 @@ if(ship.isAlive == false) {
 
 	void drawGameState(Graphics g) {
 
-		g.setColor(Color.BLACK);
-
-		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+		g.drawImage(GamePanel.spaceImg, 0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT, null);
 		manager.draw(g);
 		if (ship.x >= 450) {
 			ship.x = 450;
@@ -86,7 +96,7 @@ if(ship.isAlive == false) {
 		g.setFont(endFont);
 		g.drawString("Game Over", 140, 200);
 		g.setFont(endKilled);
-		g.drawString("You killed " + points + " enemies", 150, 350);
+		g.drawString("You killed " + manager.score + " enemies", 150, 350);
 		g.setFont(restart);
 		g.drawString("Press ENTER to restart", 130, 500);
 	}
@@ -95,6 +105,23 @@ if(ship.isAlive == false) {
 
 	// GameObject object;
 	GamePanel() {
+		try {
+			bulletsImg = ImageIO.read(this.getClass().getResourceAsStream("bullets.png"));
+
+			aliensImg = ImageIO.read(this.getClass().getResourceAsStream("aliens.png"));
+
+			rImg = ImageIO.read(this.getClass().getResourceAsStream("r.png"));
+
+			spaceImg = ImageIO.read(this.getClass().getResourceAsStream("space.png"));
+
+		} catch (IOException e) {
+
+			// TODO Auto-generated catch block
+
+			e.printStackTrace();
+
+		}
+
 		titleFont = new Font("Arial", Font.BOLD, 48);
 		titleStart = new Font("Arial", Font.BOLD, 24);
 		titleInstructions = new Font("Arial", Font.BOLD, 24);
@@ -178,11 +205,15 @@ if(ship.isAlive == false) {
 			ship.up = true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			currentState++;
-			if (currentState > END_STATE) {
+			if (currentState == MENU_STATE) {
+				currentState = GAME_STATE;
+			}
 
+			if (currentState == END_STATE) {
+				ship = new Rocketship(250, 700, 50, 50);
+				manager = new ObjectManager(ship);
 				currentState = MENU_STATE;
-
+				ship.isAlive = true;
 			}
 
 		}
