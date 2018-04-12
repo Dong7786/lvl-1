@@ -1,27 +1,26 @@
-package LeagueInvaders;
+package SnakeRemastered;
 
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class LeagueInvaders {
-
-	public static final int WIDTH = 1919;
-	public static final int HEIGHT = 800;
+public class Snake {
+	// max height 972
+	// max width 1920
+	public static final int WIDTH = 1920;
+	public static final int HEIGHT = 972;
 	JFrame frame;
-	GamePanel panel;
-
+GamePanel panel;
 	public static void main(String[] args) {
-		LeagueInvaders league = new LeagueInvaders();
+Snake snake = new Snake();
 	}
 
-	LeagueInvaders() {
-		panel = new GamePanel();
+	Snake() {
 		frame = new JFrame();
-		setup();
-
+		panel = new GamePanel();
+setup();
 	}
-
 	void setup() {
 		frame.add(panel);
 		frame.getContentPane().setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -32,4 +31,5 @@ public class LeagueInvaders {
 		panel.startGame();
 		frame.addKeyListener(panel);
 	}
+	
 }
