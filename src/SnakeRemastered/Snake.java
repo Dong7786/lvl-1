@@ -9,7 +9,7 @@ public class Snake {
 	// max height 972
 	// max width 1920
 	public static final int WIDTH = 1920;
-	public static final int HEIGHT = 972;
+	public static final int HEIGHT = 992;
 	JFrame frame;
 GamePanel panel;
 	public static void main(String[] args) {
@@ -22,6 +22,7 @@ Snake snake = new Snake();
 setup();
 	}
 	void setup() {
+		
 		frame.add(panel);
 		frame.getContentPane().setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		frame.pack();
